@@ -1,20 +1,17 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LeftArrow from "../../assets/left-arrow.svg";
 import RightArrow from "../../assets/right-arrow.svg";
-import { StoreContext } from "../App.jsx";
+import { addItem, updateQuantity } from "../../features/cartSlice.js";
 import Header from "../Header/Header.jsx";
 import "./Store.css";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { addItem, updateQuantity } from "../../features/cartSlice.js";
 
 function Store() {
   if (!window.location.href.includes("store")) window.scrollTo(0, 0);
   const [ShowModal, setShowModal] = useState(false);
   const [ShowSidebar, setShowSidebar] = useState(true);
-  const context = useContext(StoreContext);
-  const shopItems = context.shopItems;
 
+  const shopItems = useSelector((state) => state.shop.shopItems);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
@@ -46,7 +43,7 @@ function Store() {
           updateQuantity({
             itemId: existingItem.id,
             quantity: `${+existingItem.quantity + +item.quantity}`,
-          }),
+          })
         );
       }
     }

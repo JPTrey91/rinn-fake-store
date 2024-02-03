@@ -1,35 +1,21 @@
-import { createContext, useEffect, useState } from "react";
-import Router from "./Router.jsx";
-import { defaultCart } from "./DefaultCart.jsx";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { stockItems } from "../features/shopSlice.js";
 import "../index.css";
-
-const StoreContext = createContext({
-  cartItems: [],
-  shopItems: [],
-  updateCart: () => {},
-});
-
-const loadedCart = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
-  : defaultCart;
+import Router from "./Router.jsx";
 
 function App() {
-  const [CartItems, setCartItems] = useState(loadedCart);
-  const [ShopItems, setShopItems] = useState([]);
   const [FetchFailed, setFetchFailed] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState("");
   const [Loading, setLoading] = useState(true);
 
-  function updateCart(cart) {
-    setCartItems(cart);
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
+  const dispatch = useDispatch();
 
-  async function fetchItems() {
+  function fetchItems() {
     try {
-      await fetch("https://dummyjson.com/products", { mode: "cors" })
+      fetch("https://dummyjson.com/products", { mode: "cors" })
         .then((result) => result.json())
-        .then((json) => setShopItems(json.products))
+        .then((json) => dispatch(stockItems(json.products)))
         .finally(setLoading(false));
     } catch (err) {
       setErrorMessage(`${err}`);
@@ -63,23 +49,12 @@ function App() {
           </div>
         </>
       )}
-      {!FetchFailed && !Loading && (
-        <StoreContext.Provider
-          value={{
-            cartItems: CartItems,
-            shopItems: ShopItems,
-            updateCart: updateCart,
-          }}
-        >
-          <Router />
-        </StoreContext.Provider>
-      )}
+      {!FetchFailed && !Loading && <Router />}
     </>
   );
 }
 
 export default App;
-export { StoreContext };
 
 // Do the fetch
 // Create & Provide the context
