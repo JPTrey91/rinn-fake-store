@@ -134,6 +134,8 @@
 
 .add-to-cart-section > * {
   height: min(25px, fit-content);
+  flex: 1;
+  white-space: nowrap;
 }
 
 .add-to-cart-section > div {

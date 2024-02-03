@@ -30,7 +30,11 @@ const ShopItem = ({ item }) => {
   }
 
   const existingItem = cartItems.find((ci) => ci.title === item.title);
-  const addButtonLabel = existingItem ? "Add More" : "Add to Cart";
+  let addButtonLabel;
+
+  if (existingItem) {
+    addButtonLabel = existingItem.quantity === "5" ? "Maxed Out" : "Add More";
+  } else addButtonLabel = "Add to Cart";
 
   return (
     <div key={item.id} className="store-item-card">
