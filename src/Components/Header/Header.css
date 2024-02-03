@@ -1,29 +1,29 @@
 #store-header {
-    align-items:center;
-    background-color: white;
-    box-shadow: 0px 0px 10px 0px;
-    display:flex;
-    height:60px;
-    justify-content: space-between;
-    padding-left: 15px;
-    padding-right: 15px;
-    position:sticky;
-    top:0;
-    width:100%;
-    z-index:2;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 0px 10px 0px;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 }
 
-#store-header>img,
+#store-header > img,
 #logo {
-    height:min(45%, 8vw);
-    z-index:2;
+  height: min(45%, 8vw);
+  z-index: 2;
 }
 
-#store-header>img:hover,
+#store-header > img:hover,
 #logo:hover {
-    cursor:pointer;
+  cursor: pointer;
 }
 
-#store-header>*>#logo {
-    width:min(50vw, 225px);
+#store-header > * > #logo {
+  width: min(50vw, 225px);
 }
