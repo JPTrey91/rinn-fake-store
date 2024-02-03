@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartLogo from "../../assets/cart.png";
+import CartPreviewItem from "./CartPreviewItem";
 
 export default function CartPreview() {
   const [CartVisible, setCartVisible] = useState(false);
@@ -38,13 +39,7 @@ export default function CartPreview() {
                 </div>
               )}
               {cartItems.map((item) => (
-                <div key={item.id} className="mini-cart-item">
-                  <img src={item.thumbnail} />
-                  <div className="mini-cart-item-name">{`${item.title} (${item.quantity})`}</div>
-                  <div className="mini-cart-item-total">{`$${
-                    item.price * item.quantity
-                  }`}</div>
-                </div>
+                <CartPreviewItem item={item} />
               ))}
             </div>
             <div id="mini-cart-total">
