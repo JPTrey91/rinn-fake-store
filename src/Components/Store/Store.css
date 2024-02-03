@@ -145,3 +145,7 @@
 .add-to-cart-section > input {
   width: 40px;
 }
+
+.existing-item-quantity {
+  float: right;
+}

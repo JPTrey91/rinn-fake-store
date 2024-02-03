@@ -29,6 +29,9 @@ const ShopItem = ({ item }) => {
     }
   }
 
+  const existingItem = cartItems.find((ci) => ci.title === item.title);
+  const addButtonLabel = existingItem ? "Add More" : "Add to Cart";
+
   return (
     <div key={item.id} className="store-item-card">
       <div
@@ -36,7 +39,14 @@ const ShopItem = ({ item }) => {
         style={{ backgroundImage: `url(${item.thumbnail})` }}
       />
       <div className="store-item-info">
-        <h4>{`${item.title}`}</h4>
+        <h4>
+          {`${item.title}`}{" "}
+          {existingItem && (
+            <span className="existing-item-quantity">
+              ({existingItem.quantity}x in Cart)
+            </span>
+          )}
+        </h4>
         <p>{`${item.description}`}</p>
         <div className="add-to-cart-section">
           <div>Quantity:</div>
@@ -48,7 +58,7 @@ const ShopItem = ({ item }) => {
             defaultValue="1"
             ref={quantityRef}
           ></input>
-          <button onClick={() => addToCart()}>Add to Cart</button>
+          <button onClick={() => addToCart()}>{addButtonLabel}</button>
         </div>
       </div>
     </div>
