@@ -76,7 +76,7 @@
   display: flex;
 }
 
-#mini-cart-buttons > * > button {
+#mini-cart-buttons > button {
   border: none;
   color: #333333;
   height: 100%;
@@ -84,7 +84,7 @@
   width: 100%;
 }
 
-#mini-cart-buttons > a {
+#mini-cart-buttons > button {
   height: 100%;
   width: 50%;
 }
@@ -109,4 +109,8 @@
 #right-mini-cart-button:hover {
   background-color: #f3c884;
   transition: 0.3s;
+}
+
+#right-mini-cart-button:disabled {
+  background-color: #cb9032;
 }

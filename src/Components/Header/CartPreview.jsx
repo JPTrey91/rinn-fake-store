@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartLogo from "../../assets/cart.png";
 import CartPreviewItem from "./CartPreviewItem";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPreview() {
   const [CartVisible, setCartVisible] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const navigate = useNavigate();
 
   let cartTotal = 0;
   cartItems.forEach(
@@ -47,12 +49,19 @@ export default function CartPreview() {
               <div>{`$${cartTotal}`}</div>
             </div>
             <div id="mini-cart-buttons">
-              <Link to="/cart">
-                <button id="left-mini-cart-button">To Cart</button>
-              </Link>
-              <Link to="/checkout">
-                <button id="right-mini-cart-button">To Checkout</button>
-              </Link>
+              <button
+                id="left-mini-cart-button"
+                onClick={() => navigate("/cart")}
+              >
+                To Cart
+              </button>
+              <button
+                id="right-mini-cart-button"
+                onClick={() => navigate("/checkout")}
+                disabled={cartItems.length < 1}
+              >
+                To Checkout
+              </button>
             </div>
           </div>
         </div>
