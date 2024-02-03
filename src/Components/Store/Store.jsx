@@ -1,24 +1,22 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LeftArrow from "../../assets/left-arrow.svg";
 import RightArrow from "../../assets/right-arrow.svg";
-import { addItem, updateQuantity } from "../../features/cartSlice.js";
+import {
+  hideModal,
+  hideSidebar,
+  showSidebar,
+} from "../../features/shopSlice.js";
+import { capitalize } from "../../functions.js";
+import Category from "../Category/Category.jsx";
 import Header from "../Header/Header.jsx";
 import "./Store.css";
 
 function Store() {
   if (!window.location.href.includes("store")) window.scrollTo(0, 0);
-  const [ShowModal, setShowModal] = useState(false);
-  const [ShowSidebar, setShowSidebar] = useState(true);
-
+  const isShowingSidebar = useSelector((state) => state.shop.isShowingSidebar);
+  const isShowingModal = useSelector((state) => state.shop.isShowingModal);
   const shopItems = useSelector((state) => state.shop.shopItems);
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-
-  function toggleModal() {
-    const newState = ShowModal === true ? false : true;
-    setShowModal(newState);
-  }
 
   let categories = [];
   shopItems.forEach((item) => {
@@ -27,32 +25,10 @@ function Store() {
     }
   });
 
-  function capitalize(string) {
-    return string.slice(0, 1).toUpperCase() + string.slice(1);
-  }
-
-  function addToCart(item) {
-    item.quantity = document.getElementById(`${item.title}-input`).value;
-    const existingItem = cartItems.find((match) => match.title === item.title);
-    if (!existingItem) dispatch(addItem(item));
-    else {
-      if (+existingItem.quantity + +item.quantity > 5) {
-        toggleModal();
-      } else {
-        dispatch(
-          updateQuantity({
-            itemId: existingItem.id,
-            quantity: `${+existingItem.quantity + +item.quantity}`,
-          })
-        );
-      }
-    }
-  }
-
   return (
     <>
       <Header />
-      {ShowModal && (
+      {isShowingModal && (
         <>
           <div id="modal">
             <div id="modal-message">
@@ -60,26 +36,26 @@ function Store() {
                 Uh oh, you can't add more than 5 of the same item to your cart!
                 It's just a matter of our limited stock.
               </p>
-              <button onClick={() => toggleModal()}>OK</button>
+              <button onClick={() => dispatch(hideModal())}>OK</button>
             </div>
           </div>
         </>
       )}
       <div id="store-container">
-        {!ShowSidebar && (
+        {!isShowingSidebar && (
           <img
             id="store-sidebar-open"
             src={RightArrow}
-            onClick={() => setShowSidebar(true)}
+            onClick={() => dispatch(showSidebar())}
           ></img>
         )}
-        {ShowSidebar && (
+        {isShowingSidebar && (
           <div id="store-sidebar">
             <div id="store-sidebar-content">
               <img
                 id="store-sidebar-close"
                 src={LeftArrow}
-                onClick={() => setShowSidebar(false)}
+                onClick={() => dispatch(hideSidebar())}
               ></img>
               <h2>Categories</h2>
               {categories.map((category) => {
@@ -94,46 +70,15 @@ function Store() {
         )}
         <div id="store-main">
           {categories.map((category) => {
-            const categoryItems = [];
-            shopItems.forEach((item) => {
-              if (item.category === category) categoryItems.push({ ...item });
-            });
+            const categoryItems = shopItems.filter(
+              (item) => item.category === category
+            );
             return (
-              <div className="store-section-container" key={`${category}`}>
-                <div
-                  className="store-section-header"
-                  id={category}
-                >{`${capitalize(category)}`}</div>
-                <div className="store-section">
-                  {categoryItems.map((item) => {
-                    return (
-                      <div key={item.id} className="store-item-card">
-                        <div
-                          className="store-item-image"
-                          style={{ backgroundImage: `url(${item.thumbnail})` }}
-                        />
-                        <div className="store-item-info">
-                          <h4>{`${item.title}`}</h4>
-                          <p>{`${item.description}`}</p>
-                          <div className="add-to-cart-section">
-                            <div>Quantity:</div>
-                            <input
-                              id={`${item.title}-input`}
-                              type="number"
-                              max="5"
-                              min="1"
-                              defaultValue="1"
-                            ></input>
-                            <button onClick={() => addToCart(item)}>
-                              Add to Cart
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <Category
+                key={category}
+                categoryName={category}
+                categoryItems={categoryItems}
+              />
             );
           })}
         </div>
