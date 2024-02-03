@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateQuantity } from "../../features/cartSlice";
 import { showModal } from "../../features/shopSlice";
+import { MAX_QUANTITY } from "../../constants";
 
 const ShopItem = ({ item }) => {
   const quantityRef = useRef(1);
@@ -16,7 +17,7 @@ const ShopItem = ({ item }) => {
     );
     if (!existingItem) dispatch(addItem(cartItem));
     else {
-      if (+existingItem.quantity + +cartItem.quantity > 5) {
+      if (+existingItem.quantity + +cartItem.quantity > MAX_QUANTITY) {
         dispatch(showModal());
       } else {
         dispatch(
@@ -29,6 +30,14 @@ const ShopItem = ({ item }) => {
     }
   }
 
+  const existingItem = cartItems.find((ci) => ci.title === item.title);
+  let addButtonLabel;
+
+  if (existingItem) {
+    addButtonLabel =
+      existingItem.quantity === `${MAX_QUANTITY}` ? "Maxed Out" : "Add More";
+  } else addButtonLabel = "Add to Cart";
+
   return (
     <div key={item.id} className="store-item-card">
       <div
@@ -36,19 +45,28 @@ const ShopItem = ({ item }) => {
         style={{ backgroundImage: `url(${item.thumbnail})` }}
       />
       <div className="store-item-info">
-        <h4>{`${item.title}`}</h4>
+        <h4>
+          {`${item.title}`}{" "}
+          {existingItem && (
+            <span className="existing-item-quantity">
+              ({existingItem.quantity}x in Cart)
+            </span>
+          )}
+        </h4>
         <p>{`${item.description}`}</p>
         <div className="add-to-cart-section">
           <div>Quantity:</div>
           <input
             id={`${item.title}-input`}
             type="number"
-            max="5"
+            max={
+              existingItem ? MAX_QUANTITY - existingItem.quantity : MAX_QUANTITY
+            }
             min="1"
             defaultValue="1"
             ref={quantityRef}
           ></input>
-          <button onClick={() => addToCart()}>Add to Cart</button>
+          <button onClick={() => addToCart()}>{addButtonLabel}</button>
         </div>
       </div>
     </div>

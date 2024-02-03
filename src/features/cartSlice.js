@@ -3,6 +3,7 @@ import { defaultCart } from "../Components/DefaultCart";
 
 const initialState = {
   cartItems: getExistingCart(),
+  itemCount: getExistingCart().length,
 };
 
 export const cartSlice = createSlice({
@@ -12,11 +13,13 @@ export const cartSlice = createSlice({
     addItem: (state, action) => {
       const item = action.payload;
       state.cartItems = [...state.cartItems, item];
+      state.itemCount = state.cartItems.length;
       updateLocalStorage(state.cartItems);
     },
     removeItem: (state, action) => {
       const itemId = action.payload;
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+      state.itemCount = state.cartItems.length;
       updateLocalStorage(state.cartItems);
     },
     updateQuantity: (state, action) => {

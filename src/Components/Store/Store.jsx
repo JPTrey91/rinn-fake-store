@@ -10,6 +10,7 @@ import { capitalize } from "../../functions.js";
 import Category from "../Category/Category.jsx";
 import Header from "../Header/Header.jsx";
 import "./Store.css";
+import { MAX_QUANTITY } from "../../constants.js";
 
 function Store() {
   if (!window.location.href.includes("store")) window.scrollTo(0, 0);
@@ -33,8 +34,8 @@ function Store() {
           <div id="modal">
             <div id="modal-message">
               <p>
-                Uh oh, you can't add more than 5 of the same item to your cart!
-                It's just a matter of our limited stock.
+                Uh oh, you can't add more than {MAX_QUANTITY} of the same item
+                to your cart! It's just a matter of our limited stock.
               </p>
               <button onClick={() => dispatch(hideModal())}>OK</button>
             </div>
