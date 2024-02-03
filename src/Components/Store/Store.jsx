@@ -7,7 +7,7 @@ import {
   showSidebar,
 } from "../../features/shopSlice.js";
 import { capitalize } from "../../functions.js";
-import Category from "../Category/category.jsx";
+import Category from "../Category/Category.jsx";
 import Header from "../Header/Header.jsx";
 import "./Store.css";
 
