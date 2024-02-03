@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CartLogo from "../../assets/cart.png";
 import CartPreviewItem from "./CartPreviewItem";
-import { useNavigate } from "react-router-dom";
 
 export default function CartPreview() {
   const [CartVisible, setCartVisible] = useState(false);
