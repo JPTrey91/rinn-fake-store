@@ -46,7 +46,7 @@ function Store() {
           updateQuantity({
             itemId: existingItem.id,
             quantity: `${+existingItem.quantity + +item.quantity}`,
-          })
+          }),
         );
       }
     }

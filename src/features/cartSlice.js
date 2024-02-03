@@ -20,19 +20,19 @@ export const cartSlice = createSlice({
     updateQuantity: (state, action) => {
       const { itemId, quantity } = action.payload;
       state.cartItems = state.cartItems.map((item) =>
-        item.id === itemId ? { ...item, quantity } : item
+        item.id === itemId ? { ...item, quantity } : item,
       );
     },
     incrementQuantity: (state, action) => {
       const itemId = action.payload;
       state.cartItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item,
       );
     },
     decrementQuantity: (state, action) => {
       const itemId = action.payload;
       state.cartItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+        item.id === itemId ? { ...item, quantity: item.quantity - 1 } : item,
       );
     },
   },

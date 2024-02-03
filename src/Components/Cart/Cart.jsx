@@ -18,7 +18,7 @@ export default function Cart() {
 
   function updateQuantity(item) {
     const quantity = document.getElementById(
-      `${item.title}-cart-quantity`
+      `${item.title}-cart-quantity`,
     ).value;
     dispatch(cartUpdateQuantity({ itemId: item.id, quantity }));
   }

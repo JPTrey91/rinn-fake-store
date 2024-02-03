@@ -10,7 +10,7 @@ export default function CartPreview() {
 
   let cartTotal = 0;
   cartItems.forEach(
-    (item) => (cartTotal = cartTotal + item.price * item.quantity)
+    (item) => (cartTotal = cartTotal + item.price * item.quantity),
   );
 
   let cartLength = 0;

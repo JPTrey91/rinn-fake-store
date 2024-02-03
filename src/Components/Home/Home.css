@@ -1,85 +1,84 @@
 #home-container {
-    display:flex;
-    flex-direction:column;
-    width:100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-#store-banner>img {
-    width:min(600px, 80%);
+#store-banner > img {
+  width: min(600px, 80%);
 }
 
 #store-banner {
-    align-items:center;
-    background-image: url('../../assets/shop-banner.png');
-    background-size:auto;
-    display:flex;
-    height:500px;
-    justify-content:center;
+  align-items: center;
+  background-image: url("../../assets/shop-banner.png");
+  background-size: auto;
+  display: flex;
+  height: 500px;
+  justify-content: center;
 }
 
 .home-row {
-    display:flex;
-    flex-wrap:wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .home-image-block {
-    background-size:cover;
-    flex:3;
-    height:500px;
-    min-width:360px;
+  background-size: cover;
+  flex: 3;
+  height: 500px;
+  min-width: 360px;
 }
 
 .home-text-block {
-    align-items:center;
-    background-color:white;
-    display:flex;
-    flex:2;
-    flex-direction:column;
-    font-size:1.1em;
-    gap:10px;
-    height:500px;
-    justify-content:center;
-    min-width:375px;
-    padding:50px;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  font-size: 1.1em;
+  gap: 10px;
+  height: 500px;
+  justify-content: center;
+  min-width: 375px;
+  padding: 50px;
 }
 
-.home-text-block>h3 {
-    font-size:1.5em;
-    margin:0;
+.home-text-block > h3 {
+  font-size: 1.5em;
+  margin: 0;
 }
 
-.home-text-block>p {
-    max-width:380px;
+.home-text-block > p {
+  max-width: 380px;
 }
 
-.home-text-block>*>button {
-    padding: 8px 12px 8px 12px;
-    font-size: 1em;
+.home-text-block > * > button {
+  padding: 8px 12px 8px 12px;
+  font-size: 1em;
 }
 
 .spacer {
-    width:100%;
-    height:50px;
-    background-color:#f9f9f9;
+  width: 100%;
+  height: 50px;
+  background-color: #f9f9f9;
 }
 
 .home-testimonial-block {
-    align-items:center;
-    background-color:#f9f9f9;
-    display:flex;
-    flex:1;
-    flex-direction:column;
-    height: min(350px, fit-content);
-    justify-content:center;
-    min-width:300px;
-    padding:10px 50px 10px 50px;
-    text-align:center;
+  align-items: center;
+  background-color: #f9f9f9;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: min(350px, fit-content);
+  justify-content: center;
+  min-width: 300px;
+  padding: 10px 50px 10px 50px;
+  text-align: center;
 }
 
-.home-testimonial-block>p {
-    color:#666666;
-    max-width:275px;
-    font-size:1.1em;
-    font-style:italic;
+.home-testimonial-block > p {
+  color: #666666;
+  max-width: 275px;
+  font-size: 1.1em;
+  font-style: italic;
 }
-
