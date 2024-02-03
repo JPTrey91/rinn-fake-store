@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SHOW_SIDEBAR_DEFAULT } from "../constants";
 
 const initialState = {
   shopItems: [],
   isShowingModal: false,
-  isShowingSidebar: true,
+  isShowingSidebar: SHOW_SIDEBAR_DEFAULT,
 };
 
 export const shopSlice = createSlice({
