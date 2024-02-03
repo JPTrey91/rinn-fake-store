@@ -9,7 +9,7 @@ const Category = ({ categoryName, categoryItems }) => {
       )}`}</div>
       <div className="store-section">
         {categoryItems.map((item) => (
-          <ShopItem item={item} />
+          <ShopItem key={item.title} item={item} />
         ))}
       </div>
     </div>

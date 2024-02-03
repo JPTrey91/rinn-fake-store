@@ -10,7 +10,7 @@ export default function CartPreview() {
 
   let cartTotal = 0;
   cartItems.forEach(
-    (item) => (cartTotal = cartTotal + item.price * item.quantity),
+    (item) => (cartTotal = cartTotal + item.price * item.quantity)
   );
 
   let cartLength = 0;
@@ -39,7 +39,7 @@ export default function CartPreview() {
                 </div>
               )}
               {cartItems.map((item) => (
-                <CartPreviewItem item={item} />
+                <CartPreviewItem key={item.title} item={item} />
               ))}
             </div>
             <div id="mini-cart-total">
