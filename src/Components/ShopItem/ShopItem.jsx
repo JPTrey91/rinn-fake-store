@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateQuantity } from "../../features/cartSlice";
 import { showModal } from "../../features/shopSlice";
+import { MAX_QUANTITY } from "../../constants";
 
 const ShopItem = ({ item }) => {
   const quantityRef = useRef(1);
@@ -16,7 +17,7 @@ const ShopItem = ({ item }) => {
     );
     if (!existingItem) dispatch(addItem(cartItem));
     else {
-      if (+existingItem.quantity + +cartItem.quantity > 5) {
+      if (+existingItem.quantity + +cartItem.quantity > MAX_QUANTITY) {
         dispatch(showModal());
       } else {
         dispatch(
@@ -33,7 +34,8 @@ const ShopItem = ({ item }) => {
   let addButtonLabel;
 
   if (existingItem) {
-    addButtonLabel = existingItem.quantity === "5" ? "Maxed Out" : "Add More";
+    addButtonLabel =
+      existingItem.quantity === `${MAX_QUANTITY}` ? "Maxed Out" : "Add More";
   } else addButtonLabel = "Add to Cart";
 
   return (
@@ -57,7 +59,9 @@ const ShopItem = ({ item }) => {
           <input
             id={`${item.title}-input`}
             type="number"
-            max={existingItem ? 5 - existingItem.quantity : 5}
+            max={
+              existingItem ? MAX_QUANTITY - existingItem.quantity : MAX_QUANTITY
+            }
             min="1"
             defaultValue="1"
             ref={quantityRef}
