@@ -53,7 +53,7 @@ const ShopItem = ({ item }) => {
           <input
             id={`${item.title}-input`}
             type="number"
-            max="5"
+            max={existingItem ? 5 - existingItem.quantity : 5}
             min="1"
             defaultValue="1"
             ref={quantityRef}
